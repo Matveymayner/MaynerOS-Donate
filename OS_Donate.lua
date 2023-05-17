@@ -12,7 +12,7 @@ local crypt     =   require "crypt"
 local component =   require "component"
 local keyboard  =   require "keyboard"
 local dirs      =   {
-      desctop   =   "/TabletOS/Desktop/",
+      desctop   =   "/Sys32/Desktop/",
 }
 
 for _, dir in pairs(dirs) do
@@ -169,25 +169,12 @@ function screenLock()
     end
 end
 
-----------------------------------UPDATING----------------------------------
-local success, reason = core.pcall(dofile,"/TabletOS/Service/Updater.lua")
-if not success then
-    --errorReport("/TabletOS/Service/Updater.lua",success,reason)
-    core.newNotification(10,"D",core.getLanguagePackages().OS_updateServiceUnavailable,reason)
-    _G.updater = {}
-else
-    _G.updater = reason
-    if updater.hasUpdate then
-        core.showGuide("UpdateReceived")
-        core.newNotification(10,"U",core.getLanguagePackages().OS_updateAvailable,updater.lastVersName)
-    end
-end
 ----------------------------------PROGRAM LOGIC----------------------------------
 buffer.drawChanges(true)
 screenLock()
 if core.settings.userInit == "false" or not core.settings.userInit then
     local sW,sH = buffer.getResolution()
-    errorReport("/TabletOS/Apps/SetupWizard.lua",core.pcall(dofile,"/TabletOS/Apps/SetupWizard.lua"))
+    errorReport("/Sys32/etupWizard.lua",core.pcall(dofile,"/TabletOS/Apps/SetupWizard.lua"))
     graphics.drawBars()
     graphics.clearSandbox()
     graphics.drawChanges()
