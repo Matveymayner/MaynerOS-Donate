@@ -174,7 +174,7 @@ buffer.drawChanges(true)
 screenLock()
 if core.settings.userInit == "false" or not core.settings.userInit then
     local sW,sH = buffer.getResolution()
-    errorReport("/Sys32/etupWizard.lua",core.pcall(dofile,"/TabletOS/Apps/SetupWizard.lua"))
+    errorReport("/Sys32/apps/setuper.lua",core.pcall(dofile,"/Sys32/Apps/Setuper.lua"))
     graphics.drawBars()
     graphics.clearSandbox()
     graphics.drawChanges()
@@ -303,7 +303,7 @@ while true do
                     local action, meta = graphics.drawContextMenu(cX,cY,contextMenu)
                     if action == "newdir" then dir = meta end
                     if not action and meta then
-                        core.log(5,"TabletOSContextMenu",tostring(action) .. " " .. tostring(meta))
+                        core.log(5,"MaynerOS DonateContextMenu",tostring(action) .. " " .. tostring(meta))
                     end
                 end
             else
